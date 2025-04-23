@@ -1,4 +1,4 @@
-name: Update Loon Configuration
+name: Update QuantumultX Configuration
 
 on:
   schedule:
@@ -21,8 +21,8 @@ jobs:
     - name: Modify the configuration
       run: |
         
-        # 将 "PHICOMM" 替换为 "Live"
-        sed -i 's/PHICOMM/Live/g' QuantumultX.conf
+        # 将 "Color" 替换为 "mini"
+        sed -i 's/Color/mini/g' QuantumultX.conf
         
       
         # 输出修改后的文件内容以供调试
