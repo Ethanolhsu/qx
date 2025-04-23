@@ -1,0 +1,39 @@
+name: Update Loon Configuration
+
+on:
+  schedule:
+    - cron: '0 23 * * *'  # 每天23:00运行
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  update-configuration:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Fetch the latest configuration
+      run: |
+        curl -o QuantumultX.conf https://github.com/ddgksf2013/Profile/raw/master/QuantumultX.conf
+        cat QuantumultX.conf  # 输出下载的文件内容以供调试
+
+    - name: Modify the configuration
+      run: |
+        
+        # 将 "PHICOMM" 替换为 "Live"
+        sed -i 's/PHICOMM/Live/g' QuantumultX.conf
+        
+      
+        # 输出修改后的文件内容以供调试
+        cat QuantumultX.conf
+
+    - name: Check for changes and commit
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        if [ -n "$(git status --porcelain)" ]; then
+          git add .
+          git commit -m "Updated loon.conf"
+          git push
+        fi
