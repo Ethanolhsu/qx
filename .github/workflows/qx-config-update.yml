@@ -1,4 +1,8 @@
-name: Update QuantumultX.conf
+      - name: Update and process QuantumultX.conf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python update_quantumultx.py
 
 on:
   # 每天 23 点触发一次
