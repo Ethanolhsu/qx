@@ -38,13 +38,15 @@ def update_github_file(repo, file_path, new_content, sha=None):
 
 # 修改文件内容
 def modify_content(content):
+    # 替换 "Orz-3/mini/master/" 为 "Koolson/Qure/master/IconSet/"
+    modified_content = content.replace("Orz-3/mini/master/"， "Koolson/Qure/master/IconSet/")
     # 替换 "Color" 为 "mini"
     modified_content = content.replace("Color", "mini")
 
-    # 在 "wifi2: all_direct" 下一行插入 "ssid_suspended_list=Live_5G"
+    # 在 "#running_mode_trigger=filter, filter, wifi1:all_direct, wifi2: all_direct" 下一行插入 "ssid_suspended_list=Live_5G"
     lines = modified_content.splitlines()
     for i, line in enumerate(lines):
-        if line.strip() == "wifi2: all_direct":
+        if line.strip() == "#running_mode_trigger=filter, filter, wifi1:all_direct, wifi2: all_direct":
             lines.insert(i + 1, "ssid_suspended_list=Live_5G")
             break
     return "\n".join(lines)
